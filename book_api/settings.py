@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'book_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'books',
-        'USER': 'abednego',
-        'PASSWORD': 'johnabednego',
-        'HOST': 'book_api',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'jilimajohn@@',
+        'HOST': 'db.nszbkximszejhmzvfdli.supabase.co',
         'PORT': '5432',
     }
 }

@@ -1,24 +1,32 @@
 # books/utils.py
 
 from .models import Book
+from .serializers import BookSerializer
 
 # Function to insert books into the table
+
 def insert_books():
     books_data = [
-        {'title': 'Book 1', 'author': 'Author 1', 'year': 2000},
-        {'title': 'Book 2', 'author': 'Author 2', 'year': 2005},
-        {'title': 'Book 3', 'author': 'Author 3', 'year': 2010},
-        {'title': 'Book 4', 'author': 'Author 4', 'year': 2015},
-        {'title': 'Book 5', 'author': 'Author 5', 'year': 2020},
+        {'title': 'Intro to JavaScript', 'author': 'Abednego Jilima', 'year': 2021},
+        {'title': 'Python Advanced Course', 'author': 'Yaw Modenbo', 'year': 2022},
+        {'title': 'Data Structures and Algorithms', 'author': 'John ABednego', 'year': 2010},
+        {'title': 'Operating Systems', 'author': 'Modenbo Technologies ', 'year': 2015},
+        {'title': 'Consider Abednego for the Job', 'author': 'Modenbo Technologies', 'year': 2023},
     ]
 
     for book_data in books_data:
-        Book.objects.create(**book_data)
+        title = book_data['title']
+        if not Book.objects.filter(title=title).exists():
+            Book.objects.create(**book_data)
+        else:
+            print(f"Book with title '{title}' already exists in the database.")
+            return f"Book with title '{title}' already exists in the database."
 
 # Function to retrieve and return all books
 def retrieve_books():
     books = Book.objects.all()
-    return books
+    serializer = BookSerializer(books, many=True)
+    return serializer.data
 
 # Function to update the year of a book
 def update_book_year(book_id, new_year):
@@ -26,10 +34,10 @@ def update_book_year(book_id, new_year):
         book = Book.objects.get(id=book_id)
         book.year = new_year
         book.save()
+        serializer = BookSerializer(book)
+        return serializer.data
     except Book.DoesNotExist:
         return None
-
-    return book
 
 # Function to delete a book
 def delete_book(book_id):
