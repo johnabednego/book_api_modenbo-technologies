@@ -13,10 +13,11 @@ def book_list(request):
         new_title = request.data.get('title')
         new_author = request.data.get('author')
         new_year = request.data.get('year')
-        if new_title is None or new_author is None or new_year is None:
+        new_image = request.data.get('image')
+        if new_title is None or new_author is None or new_year is None or new_image is None:
             return Response({'error': "All fields are Required!!!"}, status=400)
         else:
-            return  insert_book(new_title, new_author, new_year)
+            return  insert_book(new_title, new_author, new_year, new_image)
     else:
         return Response({'error': f'{request.method} Request is not Allowed!!!'}, status=404)
 
@@ -33,11 +34,12 @@ def book_detail(request, book_id):
         new_title = request.data.get('title')
         new_author = request.data.get('author')
         new_year = request.data.get('year')
-        if new_title is None and new_author is None and new_year is None:
+        new_image = request.data.get('image')
+        if new_title is None and new_author is None and new_year is None and new_image is None:
             return Response({'error': "All fields can't be Empty!!!"}, status=400)
         else:
             # Call the update_book function
-            updated_book = update_book(book_id, new_title, new_author, new_year)
+            updated_book = update_book(book_id, new_title, new_author, new_year, new_image)
 
             if updated_book:
                 return Response({'message': f'Book with id={book_id} updated successfully.'})
