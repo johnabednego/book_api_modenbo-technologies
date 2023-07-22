@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-#3#8uq&!kd35#%5u@^u1!31(e8e!(s&4ymo73%7@b-^ed7_kty
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -97,11 +97,11 @@ USE_TZ = True
 
 # Media files (uploaded user content)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'books' / 'images'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [BASE_DIR, 'static']
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

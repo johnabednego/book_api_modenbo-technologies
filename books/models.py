@@ -7,7 +7,7 @@ class Book(models.Model):
     title = models.TextField()
     author = models.TextField()
     year = models.IntegerField()
-    image = models.ImageField(upload_to='books/images')
+    image = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title

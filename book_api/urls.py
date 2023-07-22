@@ -26,6 +26,4 @@ urlpatterns = [
     path('api/', include('books.urls')),  # Include the API endpoints from the books app
 ]
 
-# Serve media files during development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
