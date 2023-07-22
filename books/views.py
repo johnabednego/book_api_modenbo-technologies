@@ -14,9 +14,15 @@ def book_list(request):
         new_title = request.data.get('title')
         new_author = request.data.get('author')
         new_year = request.data.get('year')
-        new_image = request.FILES['image']
-        if new_title is None or new_author is None or new_year is None or new_image is None:
-            return Response({'error': "All fields are Required!!!"}, status=400)
+        new_image = request.data.get('image')
+        if new_title is None:
+            return Response({'message': "A Tittle is Required!!!"}, status=400)
+        elif new_author is None:
+            return Response({'message': "An Author is Required!!!"}, status=400)
+        elif new_year is None:
+            return Response({'message': "The publication year is Required!!!"}, status=400)
+        elif new_image is None:
+            return Response({'message': "Book Cover is Required!!!"}, status=400)
         else:
             # Save the image to the database
             if not Book.objects.filter(title=new_title).exists():
@@ -26,7 +32,7 @@ def book_list(request):
                 return Response({'message': f"Book with title '{new_title}' already exists in the database."}, status=400) 
             
     else:
-        return Response({'error': f'{request.method} Request is not Allowed!!!'}, status=404)
+        return Response({'message': f'{request.method} Request is not Allowed!!!'}, status=404)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def book_detail(request, book_id):
@@ -35,7 +41,7 @@ def book_detail(request, book_id):
         if book:
             return Response(book)
         else:
-            return Response({'error': f'Book with id={book_id} not found.'}, status=404)
+            return Response({'message': f'Book with id={book_id} not found.'}, status=404)
     elif request.method == 'PUT':
         # Retrieve the new year from the request data
         new_title = request.data.get('title')
@@ -43,10 +49,10 @@ def book_detail(request, book_id):
         new_year = request.data.get('year')
         
         # Handle image upload directly here
-        new_image = request.FILES.get('image')  # Access the uploaded image file
+        new_image = request.FILES['image'] # Access the uploaded image file
         
         if new_title is None and new_author is None and new_year is None and new_image is None:
-            return Response({'error': "All fields can't be Empty!!!"}, status=400)
+            return Response({'message': "All fields can't be Empty!!!"}, status=400)
         else:
             # Call the update_book function
             updated_book = update_book(book_id, new_title, new_author, new_year, new_image)
@@ -54,7 +60,7 @@ def book_detail(request, book_id):
             if updated_book:
                 return Response({'message': f'Book with id={book_id} updated successfully.'})
             else:
-                return Response({'error': f'Book with id={book_id} not found.'}, status=404)
+                return Response({'message': f'Book with id={book_id} not found.'}, status=404)
 
     elif request.method == 'DELETE':
         deleted = delete_book(book_id)
@@ -62,6 +68,6 @@ def book_detail(request, book_id):
         if deleted:
             return Response({'message': f'Book with id={book_id} deleted successfully.'})
         else:
-            return Response({'error': f'Book with id={book_id} not found.'}, status=404)
+            return Response({'message': f'Book with id={book_id} not found.'}, status=404)
     else:
-        return Response({'error': f'{request.method} Request is not Allowed!!!'}, status=404)
+        return Response({'message': f'{request.method} Request is not Allowed!!!'}, status=404)
