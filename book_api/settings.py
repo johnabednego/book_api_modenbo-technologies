@@ -7,7 +7,8 @@ SECRET_KEY = 'django-insecure-#3#8uq&!kd35#%5u@^u1!31(e8e!(s&4ymo73%7@b-^ed7_kty
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', 'https://book-api-modenbo-technologies.vercel.app', 'vercel.app']
+# ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', 'https://book-api-modenbo-technologies.vercel.app', 'vercel.app']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -36,10 +37,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    # Add other allowed origins as needed
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     # Add other allowed origins as needed
+# ]
 
 ROOT_URLCONF = 'book_api.urls'
 
