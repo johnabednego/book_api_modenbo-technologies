@@ -70,6 +70,7 @@ def book_list(request):
         books = retrieve_books()
         return Response(books)
     elif request.method == 'POST':
+        new_id = len(retrieve_books())+1
         new_title = request.data.get('title')
         new_author = request.data.get('author')
         new_year = request.data.get('year')
@@ -81,7 +82,7 @@ def book_list(request):
             return Response({'error': "All fields are Required!!!"}, status=400)
         else:
             # Save the image to the database
-            book = Book.objects.create(title=new_title, author=new_author, year=new_year, image=new_image)
+            book = Book.objects.create(id=new_id, title=new_title, author=new_author, year=new_year, image=new_image)
             
             return Response({'message': f'Book with id={book.id} created successfully.'}, status=201)
     else:
