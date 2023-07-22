@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import cloudinary_storage
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,6 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'books',
+    'cloudinary_storage'
+    
 ]
 
 MIDDLEWARE = [
@@ -104,5 +107,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR, 'static']
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dz4ialdlk',
+    'API_KEY': '561526154568457',
+    'API_SECRET': 'ylZO5HlUlpc_vi-q89A2h4yqM8g'
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

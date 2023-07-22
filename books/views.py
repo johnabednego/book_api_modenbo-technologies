@@ -49,7 +49,7 @@ def book_detail(request, book_id):
         new_year = request.data.get('year')
         
         # Handle image upload directly here
-        new_image = request.FILES['image'] # Access the uploaded image file
+        new_image = request.data.get('image')# Access the uploaded image file
         
         if new_title is None and new_author is None and new_year is None and new_image is None:
             return Response({'message': "All fields can't be Empty!!!"}, status=400)
