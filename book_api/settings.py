@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-#3#8uq&!kd35#%5u@^u1!31(e8e!(s&4ymo73%7@b-^ed7_kty
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', 'https://book-api-modenbo-technologies.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', 'https://book-api-modenbo-technologies.vercel.app', 'vercel.app']
 
 # Application definition
 
