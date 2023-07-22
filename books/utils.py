@@ -2,47 +2,11 @@
 from rest_framework.response import Response
 from .models import Book
 from .serializers import BookSerializer
-
-# Function to insert books into the table
-# def insert_books():
-#     books_data = [
-#     {'id': 1, 'title': 'Intro to JavaScript', 'author': 'Abednego Jilima', 'year': 2021, 'image': 'javascript.jpg'},
-#     {'id': 2, 'title': 'Python Advanced Course', 'author': 'Yaw Modenbo', 'year': 2022, 'image': 'python.jpeg'},
-#     {'id': 3, 'title': 'Data Structures and Algorithms', 'author': 'John ABednego', 'year': 2010, 'image': 'data_structures.jpg'},
-#     {'id': 4, 'title': 'Operating Systems', 'author': 'Modenbo Technologies', 'year': 2015, 'image': 'operating_systems.jpg'},
-#     {'id': 5, 'title': 'Consider Abednego for the Job', 'author': 'Modenbo Technologies', 'year': 2023, 'image': 'hire_abednego.jpg'},
-#     ]
-
-#     for book_data in books_data:
-#         title = book_data['title']
-#         if not Book.objects.filter(title=title).exists():
-#             book = Book.objects.create(
-#             id=book_data['id'],
-#             title=book_data['title'],
-#             author=book_data['author'],
-#             year=book_data['year'],
-#             image=f"books/images/{book_data['image']}"
-#             )
-#             book.save()
-#             Response({'message': 'Books created successfully.'})
-#         else:
-#             return Response({'message': f"Book with title '{title}' already exists in the database."}) 
-
 # Function to retrieve and return all books
 def retrieve_books():
     books = Book.objects.all()
     serializer = BookSerializer(books, many=True)
     return serializer.data
-
-# Function to insert a book into the table
-def insert_book(new_title, new_author, new_year, new_image):
-    if not Book.objects.filter(title=new_title).exists():
-        book_data =  {'id': len(retrieve_books())+1,'title': new_title, 'author': new_author, 'year': new_year, 'image':new_image}
-        Book.objects.create(**book_data)
-        return Response({'Book':book_data, 'message': 'Book was created successfully.'})
-    else:
-        return Response({'message': f"Book with title '{new_title}' already exists in the database."}) 
-
 
 def retrieve_book(book_id):
     try:
