@@ -14,12 +14,7 @@ def book_list(request):
         new_title = request.data.get('title')
         new_author = request.data.get('author')
         new_year = request.data.get('year')
-        
-        # Handle image upload directly here
-        # new_image = request.FILES.get('image')  # Access the uploaded image file
-        # new_image = request.data.get('image').get('path')
-        if 'image' in request.FILES:
-            new_image = request.FILES['image']
+        new_image = request.FILES['image']
         if new_title is None or new_author is None or new_year is None or new_image is None:
             return Response({'error': "All fields are Required!!!"}, status=400)
         else:
